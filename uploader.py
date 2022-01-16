@@ -1,4 +1,5 @@
 # Import the SDK and the client module
+from urllib import response
 from label_studio_sdk import Client
 import requests as rq
 import os
@@ -32,8 +33,12 @@ async def main():
         # Find the images in ./img
         for root, dir, file in os.walk(IMG_PATH):
             break
-        for future in asyncio.as_completed(map(uploadImg, file)):
-            res = await future
+        response_table = []
+        for uploader in asyncio.as_completed(map(uploadImg, file)):
+            response_table.append((await uploader).json())
+        # print(response_table)
+        [print(item) for item in response_table]
+
 
 if __name__ == '__main__':
     # loop = asyncio.get_event_loop()
