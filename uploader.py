@@ -32,7 +32,8 @@ async def main():
         # Find the images in ./img
         for root, dir, file in os.walk(IMG_PATH):
             break
-        for future in asyncio.as_completed(map(uploadImg, dir)):
+        for future in asyncio.as_completed(map(uploadImg, file)):
+            print("debug")
             await future
 
 if __name__ == '__main__':
