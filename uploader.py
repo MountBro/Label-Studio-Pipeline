@@ -10,7 +10,7 @@ API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 IMG_PATH = './img/'
 
 
-def uploadImg(path):
+async def uploadImg(path):
     # Upload the images in ./img
     headers = {
         'Authorization': 'Token 181439286e4b2ed9c0026f5e46a27a39858e6905',
@@ -33,8 +33,9 @@ async def main():
         for root, dir, file in os.walk(IMG_PATH):
             break
         for future in asyncio.as_completed(map(uploadImg, file)):
-            print("debug")
-            await future
+            res = await future
 
 if __name__ == '__main__':
+    # loop = asyncio.get_event_loop()
+    # loop.run_until_complete(main())
     asyncio.run(main())
