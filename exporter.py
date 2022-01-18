@@ -1,3 +1,4 @@
+import os
 import time
 import requests
 from label_studio_sdk import Client
@@ -9,6 +10,7 @@ from contextlib import closing
 LABEL_STUDIO_URL = 'http://localhost:8080'
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 IMG_PATH = './img/'
+EXPORT_PATH = './export/'
 
 headers = {
     'Authorization': 'Token ' + API_KEY,
@@ -35,7 +37,13 @@ def main():
             content_size = int(response.headers['content-length'])  # 内容体总大小
             progress = ProgressBar(file_name, total=content_size,
                                    unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")
-            with open(file_name, "wb") as file:
+            if not os.path.exists(EXPORT_PATH):
+                os.makedirs(EXPORT_PATH)
+            with open(EXPORT_PATH+file_name, "wb") as file:
                 for data in response.iter_content(chunk_size=chunk_size):
                     file.write(data)
                     progress.refresh(count=len(data))
+
+
+if __name__ == '__main__':
+    main()
