@@ -1,15 +1,16 @@
+# Get the project tasks
+
 import requests
+from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMG_PATH, PROJ_ID
 
 headers = {
-    'Authorization': 'Token 181439286e4b2ed9c0026f5e46a27a39858e6905',
-}
-files = {
-    'file': ('./export/2022-01-18-18:04:25.json', open('./export/2022-01-18-18:04:25.json', 'rb')),
-}
-proxies = {
-    'http': 'https://localhost:8080'
+    'Authorization': 'Token '+API_KEY,
 }
 
-response = requests.post(
-    'https://localhost:8080/api/projects/1/import', headers=headers, files=files, proxies=proxies)
+proxies = {
+    'http': 'http://localhost:8080'
+}
+
+response = requests.get(
+    'http://localhost:8080/api/projects/1/tasks/', headers=headers)
 print(response.json())

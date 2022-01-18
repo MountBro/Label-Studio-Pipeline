@@ -31,7 +31,7 @@ def main():
         }
         # FIXME 这里的id不知道是啥
         response = requests.post(
-            'http://localhost:8080/api/storages/localfiles/{id}/sync', headers=headers, data=json.dumps(data, separators=(',', ':')))
+            'http://localhost:8080/api/storages/localfiles/1/sync', headers=headers, data=json.dumps(data, separators=(',', ':')))
         print(response.json())
 
 
