@@ -18,6 +18,7 @@ async def uploadImg(path):
     files = {
         'FileUpload': (IMG_PATH+path, open(IMG_PATH+path, 'rb')),
     }
+    # FIXME add project choice
     return rq.post('http://localhost:8080/api/projects/1/import',
                    headers=headers, files=files)
 
