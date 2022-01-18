@@ -9,8 +9,8 @@ from contextlib import closing
 # Define the URL where Label Studio is accessible and the API key for your user account
 LABEL_STUDIO_URL = 'http://localhost:8080'
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
-IMG_PATH = './img/'
 EXPORT_PATH = './export/'
+PROJ_ID = 1
 
 headers = {
     'Authorization': 'Token ' + API_KEY,
@@ -28,12 +28,12 @@ def main():
         pass
     else:
         print('Connection Succeeds!')
-        with closing(requests.get(LABEL_STUDIO_URL + '/api/projects/1/export', stream=True, headers=headers, params=params)) as response:
+        with closing(requests.get(LABEL_STUDIO_URL + '/api/projects/'+str(PROJ_ID)+'/export', stream=True, headers=headers, params=params)) as response:
             # print(response.json())
             now = int(round(time.time()*1000))
             file_name = time.strftime('%Y-%m-%d-%H:%M:%S',
                                       time.localtime(now/1000))+'.json'
-            chunk_size = 1024  # 单次请求最大值
+            chunk_size = 1024  # 单次请求最大值byte
             content_size = int(response.headers['content-length'])  # 内容体总大小
             progress = ProgressBar(file_name, total=content_size,
                                    unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")

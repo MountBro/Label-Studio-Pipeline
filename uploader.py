@@ -8,10 +8,11 @@ import asyncio
 LABEL_STUDIO_URL = 'http://localhost:8080'
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 IMG_PATH = './img/'
+PROJ_ID = 1
 
 
 async def uploadImg(path):
-    # Upload the images in ./img
+    # Upload the files in ./img
     headers = {
         'Authorization': 'Token ' + API_KEY,
     }
@@ -19,7 +20,7 @@ async def uploadImg(path):
         'FileUpload': (IMG_PATH+path, open(IMG_PATH+path, 'rb')),
     }
     # FIXME add project choice
-    return requests.post('http://localhost:8080/api/projects/1/import',
+    return requests.post(LABEL_STUDIO_URL+'/api/projects/'+str(PROJ_ID)+'/import',
                          headers=headers, files=files)
 
 
@@ -30,13 +31,12 @@ async def main():
         print('Connection Fails! Please try again.')
     else:
         print('Connection Succeeds!')
-        # Find the images in ./img
+        # Find the files in ./img
         for root, dir, file in os.walk(IMG_PATH):
             break
         response_table = []
         for uploader in asyncio.as_completed(map(uploadImg, file)):
             response_table.append((await uploader).json())
-        # print(response_table)
         [print(item) for item in response_table]
 
 
