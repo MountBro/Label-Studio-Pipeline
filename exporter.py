@@ -17,16 +17,25 @@ params = (
     ('exportType', 'JSON'),
 )
 
-with closing(requests.get(LABEL_STUDIO_URL + '/api/projects/1/export', stream=True, headers=headers, params=params)) as response:
-    # print(response.json())
-    now = int(round(time.time()*1000))
-    FILE_NAME = time.strftime('%Y-%m-%d-%H:%M:%S',
-                              time.localtime(now/1000))+'.json'
-    chunk_size = 1024  # 单次请求最大值
-    content_size = int(response.headers['content-length'])  # 内容体总大小
-    progress = ProgressBar(FILE_NAME, total=content_size,
-                           unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")
-    with open(FILE_NAME, "wb") as file:
-        for data in response.iter_content(chunk_size=chunk_size):
-            file.write(data)
-            progress.refresh(count=len(data))
+
+def main():
+    # Connect to the Label Studio API and check the connection
+    lbsd = Client(url=LABEL_STUDIO_URL, api_key=API_KEY)
+    if not lbsd.check_connection()['status'] == 'UP':
+        print('Connection Fails! Please try again.')
+        pass
+    else:
+        print('Connection Succeeds!')
+        with closing(requests.get(LABEL_STUDIO_URL + '/api/projects/1/export', stream=True, headers=headers, params=params)) as response:
+            # print(response.json())
+            now = int(round(time.time()*1000))
+            file_name = time.strftime('%Y-%m-%d-%H:%M:%S',
+                                      time.localtime(now/1000))+'.json'
+            chunk_size = 1024  # 单次请求最大值
+            content_size = int(response.headers['content-length'])  # 内容体总大小
+            progress = ProgressBar(file_name, total=content_size,
+                                   unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")
+            with open(file_name, "wb") as file:
+                for data in response.iter_content(chunk_size=chunk_size):
+                    file.write(data)
+                    progress.refresh(count=len(data))

@@ -27,7 +27,7 @@ async def main():
     # Connect to the Label Studio API and check the connection
     lbsd = Client(url=LABEL_STUDIO_URL, api_key=API_KEY)
     if not lbsd.check_connection()['status'] == 'UP':
-        print('Warning: Connection Fails!')
+        print('Connection Fails! Please try again.')
     else:
         print('Connection Succeeds!')
         # Find the images in ./img
