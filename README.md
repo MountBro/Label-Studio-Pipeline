@@ -40,3 +40,9 @@ python3 uploader.py
 ```bash
 python3 syncer.py
 ```
+
+### Exporter
+
+```bash
+python3 exporter.py
+```
