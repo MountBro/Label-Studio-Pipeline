@@ -21,7 +21,7 @@ def main():
     else:
         # print('Connection Succeeds!')
         headers = {
-            'Authorization': 'Token 181439286e4b2ed9c0026f5e46a27a39858e6905',
+            'Authorization': 'Token ' + API_KEY,
             'Content-Type': 'application/json',
         }
         data = {

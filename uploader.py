@@ -13,7 +13,7 @@ IMG_PATH = './img/'
 async def uploadImg(path):
     # Upload the images in ./img
     headers = {
-        'Authorization': 'Token' + API_KEY,
+        'Authorization': 'Token ' + API_KEY,
     }
     files = {
         'FileUpload': (IMG_PATH+path, open(IMG_PATH+path, 'rb')),
