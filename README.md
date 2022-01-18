@@ -4,16 +4,7 @@ This is a [Label Studio](https://github.com/heartexlabs/label-studio) pipeline d
 
 ## Installation
 
-- Start Label Studio:
-
-```bash
-# Install all package dependencies
-pip3 install -e .
-# Run database migrations
-python3 label_studio/manage.py migrate
-# Start the server in development mode at http://localhost:8080
-python3 label_studio/manage.py runserver
-```
+- Start Label Studio (http://localhost:8080).
 
 - Clone this repo.
 - Install the SDK for Label Studio:
@@ -23,6 +14,10 @@ pip3 install label-studio-sdk
 ```
 
 ## Usage
+
+Before uploading, please revise the following values in `uploader.py`:
+
+
 
 ```bash
 python3 uploader.py
