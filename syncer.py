@@ -2,7 +2,7 @@ import asyncio
 from datetime import date
 import json
 import os
-import requests as rq
+import requests
 from label_studio_sdk import Client
 
 
@@ -35,7 +35,7 @@ def main():
             "project": 1
         }
         # FIXME 这里的id不知道是啥
-        response = rq.post(
+        response = requests.post(
             'http://localhost:8080/api/storages/localfiles/{id}/sync', headers=headers, data=json.dumps(data, separators=(',', ':')))
         print(response.json())
 

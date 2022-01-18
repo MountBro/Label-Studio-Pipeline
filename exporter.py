@@ -1,4 +1,5 @@
-import requests as rq
+import time
+import requests
 from label_studio_sdk import Client
 from ProgressBar import ProgressBar
 from contextlib import closing
@@ -8,7 +9,6 @@ from contextlib import closing
 LABEL_STUDIO_URL = 'http://localhost:8080'
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 IMG_PATH = './img/'
-FILE_NAME = 'export.json'
 
 headers = {
     'Authorization': 'Token ' + API_KEY,
@@ -17,8 +17,11 @@ params = (
     ('exportType', 'JSON'),
 )
 
-with closing(rq.get(LABEL_STUDIO_URL + '/api/projects/1/export', stream=True, headers=headers, params=params)) as response:
-    print(response.json())
+with closing(requests.get(LABEL_STUDIO_URL + '/api/projects/1/export', stream=True, headers=headers, params=params)) as response:
+    # print(response.json())
+    now = int(round(time.time()*1000))
+    FILE_NAME = time.strftime('%Y-%m-%d-%H:%M:%S',
+                              time.localtime(now/1000))+'.json'
     chunk_size = 1024  # 单次请求最大值
     content_size = int(response.headers['content-length'])  # 内容体总大小
     progress = ProgressBar(FILE_NAME, total=content_size,

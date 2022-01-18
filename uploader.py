@@ -1,6 +1,6 @@
 # Import the SDK and the client module
 from label_studio_sdk import Client
-import requests as rq
+import requests
 import os
 import asyncio
 
@@ -19,8 +19,8 @@ async def uploadImg(path):
         'FileUpload': (IMG_PATH+path, open(IMG_PATH+path, 'rb')),
     }
     # FIXME add project choice
-    return rq.post('http://localhost:8080/api/projects/1/import',
-                   headers=headers, files=files)
+    return requests.post('http://localhost:8080/api/projects/1/import',
+                         headers=headers, files=files)
 
 
 async def main():
