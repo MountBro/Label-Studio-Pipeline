@@ -4,7 +4,7 @@ import requests
 from label_studio_sdk import Client
 from ProgressBar import ProgressBar
 from contextlib import closing
-from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMG_PATH, PROJ_ID
+from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
 
 
 headers = {

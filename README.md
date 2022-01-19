@@ -26,7 +26,7 @@ LABEL_STUDIO_URL = 'http://localhost:8080'
 # API token
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 # 图像存储的文件夹
-IMG_PATH = './img/'
+IMPORT_PATH = './img/'
 ```
 
 Then start the uploading:

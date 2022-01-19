@@ -1,7 +1,7 @@
 # Get the project tasks
 
 import requests
-from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMG_PATH, PROJ_ID
+from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
 
 headers = {
     'Authorization': 'Token '+API_KEY,
