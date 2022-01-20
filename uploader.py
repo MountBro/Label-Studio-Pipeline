@@ -1,20 +1,21 @@
 # Import the SDK and the client module
-from label_studio_sdk import Client
-import requests
-import os
 import asyncio
+import os
+import requests
+from label_studio_sdk import Client
+
 from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
 
 
-async def uploadImg(path):
+async def upload_img(path):
     # Upload the files in ./img
     headers = {
         'Authorization': 'Token ' + API_KEY,
     }
     files = {
-        'FileUpload': (IMPORT_PATH+path, open(IMPORT_PATH+path, 'rb')),
+        'FileUpload': (IMPORT_PATH + path, open(IMPORT_PATH + path, 'rb')),
     }
-    return requests.post(LABEL_STUDIO_URL+'/api/projects/'+str(PROJ_ID)+'/import',
+    return requests.post(LABEL_STUDIO_URL + '/api/projects/' + str(PROJ_ID) + '/import',
                          headers=headers, files=files)
 
 
@@ -29,7 +30,7 @@ async def main():
         for root, dir, file in os.walk(IMPORT_PATH):
             break
         response_table = []
-        for uploader in asyncio.as_completed(map(uploadImg, file)):
+        for uploader in asyncio.as_completed(map(upload_img, file)):
             response_table.append((await uploader).json())
         [print(item) for item in response_table]
 
