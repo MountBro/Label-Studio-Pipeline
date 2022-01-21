@@ -40,13 +40,15 @@ PROJ_ID = 1
 - `*.jpg`
 - `*.JSON` (即，标注过的图片使用导出功能生成的JSON文件)
 
+默认需要import的文件存在`./import/`目录下，可在`const.py`进行修改。
+
 ```bash
 python3 importer.py
 ```
 
 ### Exporter
 
-此功能支持导出**已标注的**图片信息，包括点位和具体文件名etc，将导出成JSON格式。
+此功能支持导出**已标注的**图片信息，包括点位和具体文件名etc，将导出成JSON格式。 默认导出目录为`./export/`，可在`const.py`中修改。
 
 ```bash
 python3 exporter.py
