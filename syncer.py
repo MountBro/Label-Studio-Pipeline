@@ -1,10 +1,9 @@
-import asyncio
-from datetime import date
 import json
-import os
+
 import requests
 from label_studio_sdk import Client
-from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
+
+from const import LABEL_STUDIO_URL, API_KEY
 
 
 def main():
@@ -31,7 +30,8 @@ def main():
         }
         # FIXME 这里的id不知道是啥
         response = requests.post(
-            'http://localhost:8080/api/storages/localfiles/1/sync', headers=headers, data=json.dumps(data, separators=(',', ':')))
+            'http://localhost:8080/api/storages/localfiles/1/sync', headers=headers,
+            data=json.dumps(data, separators=(',', ':')))
         print(response.json())
 
 
