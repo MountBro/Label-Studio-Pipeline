@@ -1,10 +1,11 @@
 # Import the SDK and the client module
 import asyncio
 import os
+
 import requests
 from label_studio_sdk import Client
 
-from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
+from const import LABEL_STUDIO_URL, API_KEY, IMPORT_PATH, PROJ_ID
 
 
 async def upload_img(path):
@@ -27,7 +28,7 @@ async def main():
     else:
         print('Connection Succeeds!')
         # Find the files in ./img
-        for root, dir, file in os.walk(IMPORT_PATH):
+        for root, directory, file in os.walk(IMPORT_PATH):
             break
         response_table = []
         for uploader in asyncio.as_completed(map(upload_img, file)):

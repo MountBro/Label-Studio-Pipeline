@@ -1,11 +1,12 @@
 import os
-import requests
 import time
 from contextlib import closing
+
+import requests
 from label_studio_sdk import Client
 
 from ProgressBar import ProgressBar
-from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, IMPORT_PATH, PROJ_ID
+from const import LABEL_STUDIO_URL, API_KEY, EXPORT_PATH, PROJ_ID
 
 headers = {
     'Authorization': 'Token ' + API_KEY,
