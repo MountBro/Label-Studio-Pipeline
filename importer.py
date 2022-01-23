@@ -14,8 +14,9 @@ async def upload_img(path):
         'Authorization': 'Token ' + API_KEY,
     }
     files = {
-        'FileUpload': (IMPORT_PATH + path, open(IMPORT_PATH + path, 'rb')),
+        'FileUpload': (path, open(path, 'rb')),
     }
+    print("已上传：" + path)
     return requests.post(LABEL_STUDIO_URL + '/api/projects/' + str(PROJ_ID) + '/import',
                          headers=headers, files=files)
 
@@ -31,6 +32,7 @@ async def main():
         for root, directory, file in os.walk(IMPORT_PATH):
             break
         response_table = []
+        map(lambda str: IMPORT_PATH + str, file)
         for uploader in asyncio.as_completed(map(upload_img, file)):
             response_table.append((await uploader).json())
         [print(item) for item in response_table]
