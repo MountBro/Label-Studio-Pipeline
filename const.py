@@ -3,5 +3,5 @@
 LABEL_STUDIO_URL = 'http://localhost:8080'
 API_KEY = '181439286e4b2ed9c0026f5e46a27a39858e6905'
 EXPORT_PATH = './export/'
-IMPORT_PATH = './img/'
+IMPORT_PATH = './import/'
 PROJ_ID = 1
