@@ -23,6 +23,7 @@ async def upload_img(path):
 
 async def main():
     # Connect to the Label Studio API and check the connection
+    global file
     lbsd = Client(url=LABEL_STUDIO_URL, api_key=API_KEY)
     if not lbsd.check_connection()['status'] == 'UP':
         print('Connection Fails! Please try again.')
@@ -32,7 +33,7 @@ async def main():
         for root, directory, file in os.walk(IMPORT_PATH):
             break
         response_table = []
-        map(lambda str: IMPORT_PATH + str, file)
+        file = list(map(lambda name: IMPORT_PATH + name, file))
         for uploader in asyncio.as_completed(map(upload_img, file)):
             response_table.append((await uploader).json())
         [print(item) for item in response_table]
