@@ -10,11 +10,12 @@ headers = {
 
 data = {
     "project": "1",
-    "url": "https://webhook.site/3cad2046-88c4-424c-b826-68e5c25361d8",
+    "url": "https://webhook.site/231742c7-3961-4a6d-ae86-252bc34e2ca1",
     "send_payload": "true",
     "send_for_all_actions": "true",
     "is_active": "true",
-    "actions": []
+    "actions": [],
+    "headers": headers
 }
 
 proxies = {
@@ -27,7 +28,7 @@ if __name__ == '__main__':
         print('Connection Fails! Please try again.')
     else:
         print('Connection Succeeds!')
-    response = requests.get(
-        # 'http://localhost:8080/api/webhooks', headers=headers, json=data)
-        'http://localhost:8080/api/webhooks/info')
+    # response = requests.post(LABEL_STUDIO_URL + '/api/webhooks', data=data)
+    # print(response.json())
+    response = requests.get(LABEL_STUDIO_URL + '/api/webhooks/')
     print(response.json())
